@@ -1,8 +1,8 @@
-name: my-react-app
+name: chess-arena
 services:
   - name: web
     github:
-      branch: main
+      branch: frontend
       deploy_on_push: true
       repo: callumfrederiksen/claudetest-
     dockerfile_path: Dockerfile
@@ -13,3 +13,24 @@ services:
       - path: /
     health_check:
       http_path: /
+
+  - name: api
+    github:
+      branch: backend
+      deploy_on_push: true
+      repo: callumfrederiksen/claudetest-
+    dockerfile_path: Dockerfile
+    http_port: 3001
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    routes:
+      - path: /api
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        type: SECRET
+      - key: JWT_SECRET
+        scope: RUN_TIME
+        type: SECRET
+    health_check:
+      http_path: /api/health
