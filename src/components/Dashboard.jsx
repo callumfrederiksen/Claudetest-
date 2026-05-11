@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { api } from '../api/client'
 import './Dashboard.css'
 
-export default function Dashboard({ user, onLogout }) {
+export default function Dashboard({ user, onLogout, onPlay }) {
   const [leaderboard, setLeaderboard] = useState([])
   const [myStats, setMyStats] = useState(null)
 
@@ -23,15 +23,15 @@ export default function Dashboard({ user, onLogout }) {
       </header>
 
       <main className="dash-main">
-        <section className="coming-soon-card">
+        <section className="hero-card">
           <div className="board-preview">
-            {['&#9820;','&#9822;','&#9821;','&#9819;','&#9818;','&#9821;','&#9822;','&#9820;'].map((p, i) => (
-              <span key={i} dangerouslySetInnerHTML={{ __html: p }} />
+            {'♜♞♝♛♚♝♞♜'.split('').map((p, i) => (
+              <span key={i}>{p}</span>
             ))}
           </div>
-          <h2>Chess Game</h2>
-          <p>The interactive board with minimax AI is coming in the next step. Your account and stats are live.</p>
-          <span className="badge-soon">Step 2 — In Progress</span>
+          <h2>Ready to play?</h2>
+          <p>Challenge the minimax AI — can you beat it?</p>
+          <button className="btn-play" onClick={onPlay}>Play Now</button>
         </section>
 
         <div className="stats-grid">
@@ -39,11 +39,11 @@ export default function Dashboard({ user, onLogout }) {
             <h3>Your Stats</h3>
             {myStats ? (
               <ul className="stat-list">
-                <li><span>Wins</span>    <strong className="green">{myStats.wins}</strong></li>
-                <li><span>Losses</span>  <strong className="red">{myStats.losses}</strong></li>
-                <li><span>Draws</span>   <strong className="gray">{myStats.draws}</strong></li>
-                <li><span>Games</span>   <strong>{myStats.games_played}</strong></li>
-                <li><span>Best Streak</span><strong className="gold">{myStats.best_streak}</strong></li>
+                <li><span>Wins</span>        <strong className="green">{myStats.wins}</strong></li>
+                <li><span>Losses</span>      <strong className="red">{myStats.losses}</strong></li>
+                <li><span>Draws</span>       <strong className="gray">{myStats.draws}</strong></li>
+                <li><span>Games</span>       <strong>{myStats.games_played}</strong></li>
+                <li><span>Best Streak</span> <strong className="gold">{myStats.best_streak}</strong></li>
               </ul>
             ) : (
               <p className="empty">No games played yet.</p>
@@ -62,9 +62,7 @@ export default function Dashboard({ user, onLogout }) {
                 <tbody>
                   {leaderboard.map((row, i) => (
                     <tr key={row.username} className={row.username === user.username ? 'highlight' : ''}>
-                      <td className="rank">
-                        {i === 0 ? '&#127945;' : i === 1 ? '&#127944;' : i === 2 ? '&#127943;' : i + 1}
-                      </td>
+                      <td className="rank">{i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i + 1}</td>
                       <td>{row.username}</td>
                       <td className="green">{row.wins}</td>
                       <td className="red">{row.losses}</td>

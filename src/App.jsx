@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import Auth from './components/Auth'
 import Dashboard from './components/Dashboard'
+import Game from './components/Game'
 
-function App() {
+export default function App() {
   const [user, setUser] = useState(null)
   const [ready, setReady] = useState(false)
+  const [page, setPage] = useState('dashboard')
 
   useEffect(() => {
     const token = localStorage.getItem('chess_token')
@@ -17,17 +19,18 @@ function App() {
     localStorage.setItem('chess_token', token)
     localStorage.setItem('chess_user', JSON.stringify(userData))
     setUser(userData)
+    setPage('dashboard')
   }
 
   const handleLogout = () => {
     localStorage.removeItem('chess_token')
     localStorage.removeItem('chess_user')
     setUser(null)
+    setPage('dashboard')
   }
 
   if (!ready) return null
   if (!user) return <Auth onLogin={handleLogin} />
-  return <Dashboard user={user} onLogout={handleLogout} />
+  if (page === 'game') return <Game user={user} onBack={() => setPage('dashboard')} />
+  return <Dashboard user={user} onLogout={handleLogout} onPlay={() => setPage('game')} />
 }
-
-export default App

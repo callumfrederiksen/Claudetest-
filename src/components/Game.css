@@ -1,0 +1,128 @@
+.gpage { min-height: 100vh; background: #f8faff; }
+
+.ghdr {
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.bbk {
+  background: none;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.bbk:hover { border-color: #6366f1; color: #6366f1; }
+
+.logo { font-size: 1.1rem; font-weight: 800; color: #6366f1; }
+
+.uchip {
+  background: #f1f5f9;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.gmain {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.bcol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.sbar {
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  color: #475569;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s;
+}
+.sbar.chk  { background: #fff7ed; color: #c2410c; }
+.sbar.over { background: #6366f1; color: #fff; }
+
+.bng {
+  padding: 0.6rem 1.5rem;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.bng:hover { background: #4f46e5; }
+
+.gaside  { flex: 1; display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+
+.acard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  border: 1.5px solid #e2e8f0;
+}
+.acard h3 { font-size: 0.9rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem; }
+
+.mlist { max-height: 320px; overflow-y: auto; }
+
+.mpairs {
+  padding-left: 1.5rem;
+  list-style: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.mpairs li { display: flex; gap: 0.75rem; font-size: 0.82rem; }
+.wm { font-weight: 600; color: #0f172a; font-family: monospace; }
+.bm { color: #64748b; font-family: monospace; }
+
+.empty { font-size: 0.85rem; color: #94a3b8; }
+
+.aicard p { font-size: 0.85rem; color: #64748b; margin-bottom: 0.75rem; }
+
+.airow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.aidot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
+}
+
+@media (max-width: 768px) {
+  .gmain { flex-direction: column; align-items: center; padding: 1rem; }
+  .gaside { width: 100%; max-width: 500px; }
+}
