@@ -1,6 +1,37 @@
 services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: chess
+      POSTGRES_USER: chess
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-chess_dev_password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chess"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgres://chess:${DB_PASSWORD:-chess_dev_password}@db:5432/chess
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-in-prod}
+      PORT: 3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+
   web:
     build: .
     ports:
       - "8080:80"
+    depends_on:
+      - api
     restart: unless-stopped
+
+volumes:
+  pgdata:
