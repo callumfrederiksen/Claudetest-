@@ -1,0 +1,15 @@
+name: my-react-app
+services:
+  - name: web
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: callumfrederiksen/claudetest-
+    dockerfile_path: Dockerfile
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    routes:
+      - path: /
+    health_check:
+      http_path: /
